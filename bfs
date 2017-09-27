@@ -1,0 +1,79 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package javaapplication2;
+import java.util.*;
+
+
+/**
+ *
+ * @author shahzad
+ */
+
+class Graph{
+   public  ArrayList<String> verticies = new ArrayList<String>();
+   public  HashMap<String,ArrayList<String>> adjlist = new HashMap<String,ArrayList<String>>();
+   
+   
+   public void addedge(String vertexA,String vertexB){
+   ArrayList<String> addTO =adjlist.get(vertexA);
+   
+   if(addTO==null)
+       addTO= new ArrayList<String>();
+       addTO.add(vertexB);
+       adjlist.put(vertexA, addTO);
+       
+   }
+   public void bfs(String root){
+       ArrayList<String> s = new ArrayList();
+       ArrayDeque<String> Q = new ArrayDeque<>();
+       
+       s.add(root);
+       Q.add(root);
+       
+       
+       while(!Q.isEmpty()){       
+            root=Q.poll();
+            System.out.print(root+"->");
+               for (String n : adjlist.get(root)){
+                   
+                   //System.out.print("n is:"+n);
+                       if(s.contains(n))
+                           s.add(n);
+                       Q.add(n);
+                           
+                   
+                   }
+              
+       }
+       
+       
+   
+   
+   
+    
+   }   
+}
+
+
+
+public class JavaApplication2 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Graph g = new Graph();
+        g.addedge("S", "A");
+        g.addedge("S", "B");
+        g.addedge("S", "C");
+        g.addedge("A", "C");
+        g.addedge("B", "D");
+        g.addedge("B", "F");
+        g.bfs("S");
+    }
+    
+}
